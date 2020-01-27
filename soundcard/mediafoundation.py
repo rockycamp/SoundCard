@@ -634,7 +634,8 @@ class _Player(_AudioClient):
             bytes = data[:towrite].ravel().tostring()
             buffer = self._render_buffer(towrite)
             _ffi.memmove(buffer[0], bytes, len(bytes))
-            self._render_release(towrite)
+            self._render_release(data[:towrite].shape[0])
+            #self._render_release(towrite)
             data = data[towrite:]
 
 class _Recorder(_AudioClient):
